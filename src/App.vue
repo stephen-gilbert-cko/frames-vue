@@ -1,55 +1,11 @@
 <template>
-  <div className="App">
     <div id="payment-form">
       <Frames
-          :config="{
-            publicKey: 'pk_test_6e40a700-d563-43cd-89d0-f9bb17d35e73',
-            cardTokenized: this.onCardTokenized,
-            localization: {
-              cardNumberPlaceholder: '•••• •••• •••• ••••',
-              expiryMonthPlaceholder: 'MM',
-              expiryYearPlaceholder: 'YY',
-              cvvPlaceholder: '•••',
-            },
-            debug: true,
-            style: {
-              base: {
-                paddingLeft: '1rem',
-                border: '1px solid #9b9b9b',
-                borderRadius: '5px',
-                color: '#263238',
-                fontSize: '12px',
-                fontStyle: 'normal',
-                fontFamily: 'Open Sans, Helvetica, Arial, sans-serif',
-                fontWeight: 'normal',
-                lineHeight: '16px',
-                letterSpacing: '0.22px',
-              },
-              focus: {
-                border: '1px solid #41a5dd',
-                boxShadow: '0px 0px 2px #41a5dd',
-                backgroundColor: '#fff',
-              },
-              invalid: {
-                border: '1px solid #D96830',
-              },
-              placeholder: {
-                base: {
-                  fontSize: '12px',
-                },
-                focus: {
-                  fontSize: '14px',
-                },
-              },
-            }
-          }"/>
-      <input
-        class="card-name"
-        type="text"
-        placeholder="Cardholder name"
-        name="cc-name"
-        autocomplete="cc-name"
-      />
+          :config="config"
+          @ready="ready"
+          @frameFocus="frameFocus"
+          @cardTokenized="cardTokenized"
+          />
       <CardNumber />
       <div class="date-and-code">
         <ExpiryDate />
@@ -57,11 +13,9 @@
       </div>
       <button class="pay" v-on:click="submitCard">Pay Now</button>
     </div>
-  </div>
 </template>
 
 <script>
-// import framesMixin from "./Frames.vue";
 import Frames from "./Frames.vue";
 import CardNumber from "./components/CardNumber.vue";
 import ExpiryDate from "./components/ExpiryDate.vue";
@@ -69,7 +23,6 @@ import Cvv from "./components/Cvv.vue";
 
 export default {
   name: "App",
-  // mixins: [framesMixin],
   components: {
     Frames,
     CardNumber,
@@ -78,88 +31,80 @@ export default {
   },
   data() {
     return {
-      debug: true,
-      publicKey: 'pk_test_6e40a700-d563-43cd-89d0-f9bb17d35e73',
-      localization: {
-          cardNumberPlaceholder: 'Card number',
+      config: {
+        debug: false,
+        publicKey: 'pk_test_6e40a700-d563-43cd-89d0-f9bb17d35e73',
+        localization: {
+          cardNumberPlaceholder: '•••• •••• •••• ••••',
           expiryMonthPlaceholder: 'MM',
           expiryYearPlaceholder: 'YY',
-          cvvPlaceholder: 'CVV',
-      },
-      style: {
-          base: {
-              fontSize: '17px',
-          },
-      },
+          cvvPlaceholder: '•••',
+        }
+      }
     };
   },
-  // mounted: function () {
-  //   this.$nextTick(function () {
-  //     // remove event handlers to avoid event duplication
-  //     window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_SUBMITTED);
-  //     window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_TOKENIZATION_FAILED);
-  //     window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_TOKENIZED);
-  //     window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_VALIDATION_CHANGED);
-  //     window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_ACTIVATED);
-  //     window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_BLUR);
-  //     window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_FOCUS);
-  //     window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_VALIDATION_CHANGED);
-  //     window.Frames.removeAllEventHandlers(window.Frames.Events.PAYMENT_METHOD_CHANGED);
-  //     window.Frames.removeAllEventHandlers(window.Frames.Events.READY);
-  //     window.Frames.init({
-  //       publicKey: "pk_test_4296fd52-efba-4a38-b6ce-cf0d93639d8a",
-  //       cardTokenized: this.onCardTokenized,
-  //       localization: {
-  //         cardNumberPlaceholder: "•••• •••• •••• ••••",
-  //         expiryMonthPlaceholder: "MM",
-  //         expiryYearPlaceholder: "YY",
-  //         cvvPlaceholder: "•••",
-  //       },
-  //       debug: true,
-  //       style: {
-  //         base: {
-  //           paddingLeft: "1rem",
-  //           border: "1px solid #9b9b9b",
-  //           borderRadius: "5px",
-  //           color: "#263238",
-  //           fontSize: "12px",
-  //           fontStyle: "normal",
-  //           fontFamily: "'Open Sans', Open Sans, Helvetica, Arial, sans-serif",
-  //           fontWeight: "normal",
-  //           lineHeight: "16px",
-  //           letterSpacing: "0.22px",
-  //         },
-  //         focus: {
-  //           border: "1px solid #41a5dd",
-  //           boxShadow: "0px 0px 2px #41a5dd",
-  //           backgroundColor: "#fff",
-  //         },
-  //         invalid: {
-  //           border: "1px solid #D96830",
-  //         },
-  //         placeholder: {
-  //           base: {
-  //             fontSize: "12px",
-  //           },
-  //           focus: {
-  //             fontSize: "14px",
-  //           },
-  //         },
-  //       },
-  //     });
-  //   });
-  // },
   methods: {
-    onCardTokenized(e) {
-      console.log("Token details:", e);
-      alert(`The card token: ${e.token} \nDetails in console. `);
+    cardTokenized(e) {
+      console.log(`The card token: ${e.token}`);
+    },
+    ready(e) {
+      console.log("ready", e);
+    },
+    frameFocus(e) {
+      console.log("frameFocus",e);
     },
     submitCard: function () {
-      window.Frames.cardholder.name = document.querySelector(".card-name").value;
-      window.Frames.submitCard();
+      Frames.submitCard();
     },
   },
 };
 </script>
 
-<style></style>
+<style>
+iframe {
+  /* This fixes a mobile Safari bug */
+  height: 38px !important;
+}
+
+#payment-form {
+  width: 280px;
+  margin: 0 auto;
+}
+
+.date-and-code {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.date-and-code > div:nth-child(1) {
+  width: 55.715%;
+}
+.date-and-code > div:nth-child(2) {
+  width: 45.719%;
+}
+
+
+.card-number-frame,
+.expiry-date-frame,
+.cvv-frame {
+  flex: 1 1 auto;
+  padding-left: 40px;
+}
+
+.frame--activated {
+  opacity: 1;
+  border: solid 1px #13395e;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px 0 rgba(19, 57, 94, 0.2);
+}
+
+.frame--activated.frame--focus {
+  border: solid 1px #13395e;
+  box-shadow: 0 2px 5px 0 rgba(19, 57, 94, 0.15);
+}
+
+.frame--activated.frame--invalid {
+  border: solid 1px #d96830;
+  box-shadow: 0 2px 5px 0 rgba(217, 104, 48, 0.15);
+}
+</style>
