@@ -1,18 +1,18 @@
 <template>
-    <div id="payment-form">
-      <Frames
-          :config="config"
-          @ready="ready"
-          @frameFocus="frameFocus"
-          @cardTokenized="cardTokenized"
-          />
-      <CardNumber />
-      <div class="date-and-code">
-        <ExpiryDate />
-        <Cvv />
-      </div>
-      <button class="pay" v-on:click="submitCard">Pay Now</button>
+  <div id="payment-form">
+    <Frames
+      :config="config"
+      @ready="ready"
+      @frameFocus="frameFocus"
+      @cardTokenized="cardTokenized"
+    />
+    <CardNumber />
+    <div class="date-and-code">
+      <ExpiryDate />
+      <Cvv />
     </div>
+    <button id="pay-button" v-on:click="submitCard">Pay Now</button>
+  </div>
 </template>
 
 <script>
@@ -32,26 +32,31 @@ export default {
   data() {
     return {
       config: {
-        debug: false,
-        publicKey: 'pk_test_6e40a700-d563-43cd-89d0-f9bb17d35e73',
+        debug: true,
+        publicKey: "pk_test_7d8d24fc-ffdb-4efc-b945-a19847ce319a",
         localization: {
-          cardNumberPlaceholder: '•••• •••• •••• ••••',
-          expiryMonthPlaceholder: 'MM',
-          expiryYearPlaceholder: 'YY',
-          cvvPlaceholder: '•••',
-        }
-      }
+          cardNumberPlaceholder: "Card number",
+          expiryMonthPlaceholder: "MM",
+          expiryYearPlaceholder: "YY",
+          cvvPlaceholder: "CVV",
+        },
+        style: {
+          base: {
+            fontSize: "17px",
+          },
+        },
+      },
     };
   },
   methods: {
     cardTokenized(e) {
-      console.log(`The card token: ${e.token}`);
+      console.log(`Card token: ${e.token}`);
     },
     ready(e) {
       console.log("ready", e);
     },
     frameFocus(e) {
-      console.log("frameFocus",e);
+      console.log("frameFocus", e);
     },
     submitCard: function () {
       Frames.submitCard();
@@ -83,7 +88,6 @@ iframe {
   width: 45.719%;
 }
 
-
 .card-number-frame,
 .expiry-date-frame,
 .cvv-frame {
@@ -106,5 +110,35 @@ iframe {
 .frame--activated.frame--invalid {
   border: solid 1px #d96830;
   box-shadow: 0 2px 5px 0 rgba(217, 104, 48, 0.15);
+}
+
+#pay-button {
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  font-weight: 500;
+  height: 40px;
+  width: 100%;
+  background-color: #13395e;
+  box-shadow: 0 1px 3px 0 rgba(19, 57, 94, 0.4);
+}
+
+#pay-button:active {
+  background-color: #0b2a49;
+  box-shadow: 0 1px 3px 0 rgba(19, 57, 94, 0.4);
+}
+
+#pay-button:hover {
+  background-color: #15406b;
+  box-shadow: 0 2px 5px 0 rgba(19, 57, 94, 0.4);
+}
+
+#pay-button:disabled {
+  background-color: #697887;
+  box-shadow: none;
+}
+
+#pay-button:not(:disabled) {
+  cursor: pointer;
 }
 </style>
