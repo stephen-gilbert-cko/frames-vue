@@ -11,7 +11,7 @@
       <ExpiryDate />
       <Cvv />
     </div>
-    <button id="pay-button" v-on:click="submitCard">Pay Now</button>
+    <button id="pay-button" @click="submitCard">Pay Now</button>
   </div>
 </template>
 
@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       config: {
-        debug: true,
+        debug: false,
         publicKey: "pk_test_7d8d24fc-ffdb-4efc-b945-a19847ce319a",
         localization: {
           cardNumberPlaceholder: "Card number",

@@ -70,48 +70,6 @@ export default {
         );
       }
     },
-    clearEventHandlers: function () {
-      // Remove event handlers to avoid event duplication
-      window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_SUBMITTED);
-      window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_TOKENIZATION_FAILED);
-      window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_TOKENIZED);
-      window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_VALIDATION_CHANGED);
-      window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_ACTIVATED);
-      window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_BLUR);
-      window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_FOCUS);
-      window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_VALIDATION_CHANGED);
-      window.Frames.removeAllEventHandlers(window.Frames.Events.PAYMENT_METHOD_CHANGED);
-      window.Frames.removeAllEventHandlers(window.Frames.Events.READY);
-    },
-    /* Initialize or reinitialize Frames */
-    init: function (config) {
-      this.clearEventHandlers();
-      config ? window.Frames.init(config) : window.Frames.init();
-    },
-    /* Returns the state of the card form validation */
-    isCardValid: function () {
-      return window.Frames.isCardValid();
-    },
-    /* Submits the card form if all form values are valid */
-    submitCard: function () {
-      window.Frames.submitCard();
-    },
-    /* Retains the entered card details and allows you to resubmit the payment form */
-    enableSubmitForm: function () {
-      window.Frames.enableSubmitForm();
-    },
-    /* Adds a handler that is called when the specified event is triggered */
-    addEventHandler: function (event, handler) {
-      window.Frames.addEventHandler(event, handler);
-    },
-    /* Removes a previously added handler from an event by providing the event name and handler as arguments in the method */
-    removeEventHandler: function (event, handler) {
-      window.Frames.removeEventHandler(event, handler);
-    },
-    /* Removes all handlers added to the event specified */
-    removeAllEventHandlers: function (event) {
-      window.Frames.removeAllEventHandlers(event);
-    },
   },
   mounted() {
     const existingScript = document.querySelector(
@@ -129,6 +87,48 @@ export default {
     if (window.Frames) {
       this.clearEventHandlers();
     }
+  },
+  clearEventHandlers: function () {
+    // Remove event handlers to avoid event duplication
+    window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_SUBMITTED);
+    window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_TOKENIZATION_FAILED);
+    window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_TOKENIZED);
+    window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_VALIDATION_CHANGED);
+    window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_ACTIVATED);
+    window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_BLUR);
+    window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_FOCUS);
+    window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_VALIDATION_CHANGED);
+    window.Frames.removeAllEventHandlers(window.Frames.Events.PAYMENT_METHOD_CHANGED);
+    window.Frames.removeAllEventHandlers(window.Frames.Events.READY);
+  },
+  /* Initialize or reinitialize Frames */
+  init: function (config) {
+    this.clearEventHandlers();
+    config ? window.Frames.init(config) : window.Frames.init();
+  },
+  /* Returns the state of the card form validation */
+  isCardValid: function () {
+    return window.Frames.isCardValid();
+  },
+  /* Submits the card form if all form values are valid */
+  submitCard: function () {
+    window.Frames.submitCard();
+  },
+  /* Retains the entered card details and allows you to resubmit the payment form */
+  enableSubmitForm: function () {
+    window.Frames.enableSubmitForm();
+  },
+  /* Adds a handler that is called when the specified event is triggered */
+  addEventHandler: function (event, handler) {
+    window.Frames.addEventHandler(event, handler);
+  },
+  /* Removes a previously added handler from an event by providing the event name and handler as arguments in the method */
+  removeEventHandler: function (event, handler) {
+    window.Frames.removeEventHandler(event, handler);
+  },
+  /* Removes all handlers added to the event specified */
+  removeAllEventHandlers: function (event) {
+    window.Frames.removeAllEventHandlers(event);
   },
 };
 </script>
