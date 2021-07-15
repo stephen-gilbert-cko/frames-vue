@@ -70,6 +70,19 @@ export default {
         );
       }
     },
+    clearEventHandlers: function () {
+      // Remove event handlers to avoid event duplication
+      window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_SUBMITTED);
+      window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_TOKENIZATION_FAILED);
+      window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_TOKENIZED);
+      window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_VALIDATION_CHANGED);
+      window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_ACTIVATED);
+      window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_BLUR);
+      window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_FOCUS);
+      window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_VALIDATION_CHANGED);
+      window.Frames.removeAllEventHandlers(window.Frames.Events.PAYMENT_METHOD_CHANGED);
+      window.Frames.removeAllEventHandlers(window.Frames.Events.READY);
+    },
   },
   mounted() {
     const existingScript = document.querySelector(
@@ -77,7 +90,7 @@ export default {
     );
     if (!existingScript) {
       console.error(
-        `Checkout.com CDN not present. Perhaps you forgot to add the CDN script to your index.html file.`
+        `Checkout.com CDN script not found. Perhaps you forgot to add the CDN script to your index.html file.`
       );
     } else {
       this.initializeFrames();
@@ -87,19 +100,6 @@ export default {
     if (window.Frames) {
       this.clearEventHandlers();
     }
-  },
-  clearEventHandlers: function () {
-    // Remove event handlers to avoid event duplication
-    window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_SUBMITTED);
-    window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_TOKENIZATION_FAILED);
-    window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_TOKENIZED);
-    window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_VALIDATION_CHANGED);
-    window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_ACTIVATED);
-    window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_BLUR);
-    window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_FOCUS);
-    window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_VALIDATION_CHANGED);
-    window.Frames.removeAllEventHandlers(window.Frames.Events.PAYMENT_METHOD_CHANGED);
-    window.Frames.removeAllEventHandlers(window.Frames.Events.READY);
   },
   /* Initialize or reinitialize Frames */
   init: function (config) {

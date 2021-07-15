@@ -58,7 +58,7 @@ export default {
     frameFocus(e) {
       console.log("frameFocus", e);
     },
-    submitCard: function () {
+    submitCard() {
       Frames.submitCard();
     },
   },

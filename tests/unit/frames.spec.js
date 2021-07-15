@@ -49,7 +49,7 @@ describe("Frames.vue", () => {
     expect(wrapper.html()).toBe(`<div class="frames"></div>`);
     expect(console.error).toBeCalledTimes(1);
     expect(console.error).toHaveBeenLastCalledWith(
-      "Checkout.com CDN not present. Perhaps you forgot to add the CDN script to your index.html file."
+      "Checkout.com CDN script not found. Perhaps you forgot to add the CDN script to your index.html file."
     );
   });
 });
