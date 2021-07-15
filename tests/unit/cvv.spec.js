@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import Cvv from "@/components/Cvv.vue";
+import Cvv from "@/lib-components/Cvv.vue";
 
 describe("Cvv.vue", () => {
   it("renders expiry date placeholder with injected class name", () => {

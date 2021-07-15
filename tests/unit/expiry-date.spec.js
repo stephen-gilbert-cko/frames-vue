@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import ExpiryDate from "@/components/ExpiryDate.vue";
+import ExpiryDate from "@/lib-components/ExpiryDate.vue";
 
 describe("ExpiryDate.vue", () => {
   it("renders expiry date placeholder with injected class name", () => {

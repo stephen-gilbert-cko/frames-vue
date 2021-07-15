@@ -1,28 +1,10 @@
-<template>
-  <div id="payment-form">
-    <Frames
-      :config="config"
-      @ready="ready"
-      @frameFocus="frameFocus"
-      @cardTokenized="cardTokenized"
-    />
-    <CardNumber />
-    <div class="date-and-code">
-      <ExpiryDate />
-      <Cvv />
-    </div>
-    <button id="pay-button" @click="submitCard">Pay Now</button>
-  </div>
-</template>
-
 <script>
-import Frames from "./Frames.vue";
-import CardNumber from "./components/CardNumber.vue";
-import ExpiryDate from "./components/ExpiryDate.vue";
-import Cvv from "./components/Cvv.vue";
+import { defineComponent } from "vue";
 
-export default {
-  name: "App",
+import { Frames, CardNumber, ExpiryDate, Cvv } from "@/entry.esm";
+
+export default defineComponent({
+  name: "ServeDev",
   components: {
     Frames,
     CardNumber,
@@ -46,6 +28,7 @@ export default {
           },
         },
       },
+      show: false,
     };
   },
   methods: {
@@ -62,8 +45,40 @@ export default {
       Frames.submitCard();
     },
   },
-};
+  mounted() {
+    // Manually insert the CDN whne mounted then rneter Frames
+    var script = document.createElement("script");
+    script.onload = () => {
+      this.show = true;
+    };
+    script.src = "https://cdn.checkout.com/js/framesv2.min.js";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  },
+});
 </script>
+
+<template>
+  <div id="app">
+    <donut v-if="show">
+      <div id="payment-form">
+        <Frames
+          :config="config"
+          @ready="ready"
+          @frameFocus="frameFocus"
+          @cardTokenized="cardTokenized"
+        />
+        <CardNumber />
+        <div class="date-and-code">
+          <ExpiryDate />
+          <Cvv />
+        </div>
+        <button id="pay-button" @click="submitCard">Pay Now</button>
+      </div>
+    </donut>
+  </div>
+</template>
+
+
 
 <style>
 iframe {

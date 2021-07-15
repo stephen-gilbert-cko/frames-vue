@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import CardNumber from "@/components/CardNumber.vue";
+import CardNumber from "@/lib-components/CardNumber.vue";
 
 describe("CardNumber.vue", () => {
   it("renders the card number placeholder with injected class name", () => {

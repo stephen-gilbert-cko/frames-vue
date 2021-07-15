@@ -1,5 +1,7 @@
 <template>
-  <div class="frames"></div>
+  <div class="frames">
+    <slot />
+  </div>
 </template>
 
 <script>
@@ -8,16 +10,30 @@ export default {
     config: {
       type: Object,
       default: () => ({}),
+      required: true,
     },
+    init: Function,
+    isCardValid: Function,
+    submitCard: Function,
+    enableSubmitForm: Function,
+    addEventHandler: Function,
+    removeEventHandler: Function,
+    removeAllEventHandlers: Function,
   },
   methods: {
     initializeFrames: function () {
       let config = {
         publicKey: this.config.publicKey,
         debug: this.config.debug,
-        style: this.config.style,
-        cardholder: this.config.cardholder,
-        localization: this.config.localization,
+        style: this.config.style
+          ? JSON.parse(JSON.stringify(this.config.style))
+          : undefined,
+        cardholder: this.config.cardholder
+          ? JSON.parse(JSON.stringify(this.config.cardholder))
+          : undefined,
+        localization: this.config.localization
+          ? JSON.parse(JSON.stringify(this.config.localization))
+          : undefined,
         ready: () => {
           this.$emit("ready");
         },
@@ -73,14 +89,24 @@ export default {
     clearEventHandlers: function () {
       // Remove event handlers to avoid event duplication
       window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_SUBMITTED);
-      window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_TOKENIZATION_FAILED);
+      window.Frames.removeAllEventHandlers(
+        window.Frames.Events.CARD_TOKENIZATION_FAILED
+      );
       window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_TOKENIZED);
-      window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_VALIDATION_CHANGED);
-      window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_ACTIVATED);
+      window.Frames.removeAllEventHandlers(
+        window.Frames.Events.CARD_VALIDATION_CHANGED
+      );
+      window.Frames.removeAllEventHandlers(
+        window.Frames.Events.FRAME_ACTIVATED
+      );
       window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_BLUR);
       window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_FOCUS);
-      window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_VALIDATION_CHANGED);
-      window.Frames.removeAllEventHandlers(window.Frames.Events.PAYMENT_METHOD_CHANGED);
+      window.Frames.removeAllEventHandlers(
+        window.Frames.Events.FRAME_VALIDATION_CHANGED
+      );
+      window.Frames.removeAllEventHandlers(
+        window.Frames.Events.PAYMENT_METHOD_CHANGED
+      );
       window.Frames.removeAllEventHandlers(window.Frames.Events.READY);
     },
   },

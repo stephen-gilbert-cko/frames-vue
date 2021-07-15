@@ -1,8 +1,8 @@
 import { mount } from "@vue/test-utils";
-import Frames from "@/Frames.vue";
-import CardNumber from "@/components/CardNumber.vue";
-import ExpiryDate from "@/components/ExpiryDate.vue";
-import Cvv from "@/components/Cvv.vue";
+import Frames from "@/lib-components/Frames.vue";
+import CardNumber from "@/lib-components/CardNumber.vue";
+import ExpiryDate from "@/lib-components/ExpiryDate.vue";
+import Cvv from "@/lib-components/Cvv.vue";
 
 describe("Frames.vue", () => {
   it("throws error when the CDN is not included", () => {
