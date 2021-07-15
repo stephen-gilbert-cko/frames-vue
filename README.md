@@ -1,12 +1,12 @@
-❗️BETA
+<!-- ❗️BETA -->
 
 This project is a minimal Vue wrapper of [Checkout.com Frames](https://docs.checkout.com/integrate/frames). This version only supports the [multiple iframes](https://docs.checkout.com/integrate/frames/frames-customization-guide#Framescustomizationguide-Multipleiframes) configuration.
 
-# :rocket: Install
+<!-- # :rocket: Install
 
 ```bash
 npm install frames-vue
-```
+``` -->
 
 # :globe_with_meridians: Load the CDN script
 
@@ -28,11 +28,11 @@ head: {
   }
 ```
 
-# :sparkles: Import the components
+<!-- # :sparkles: Import the components
 
 ```js
 import { Frames, CardNumber, ExpiryDate, Cvv } from "frames-vue";
-```
+``` -->
 
 # :book: Example Usage
 
@@ -53,6 +53,11 @@ import { Frames, CardNumber, ExpiryDate, Cvv } from "frames-vue";
 </template>
 
 <script>
+import Frames from "./Frames.vue";
+import CardNumber from "./components/CardNumber.vue";
+import ExpiryDate from "./components/ExpiryDate.vue";
+import Cvv from "./components/Cvv.vue";
+
 export default {
   name: "App",
   components: {

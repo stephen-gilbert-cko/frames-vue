@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       config: {
-        debug: false,
+        debug: true,
         publicKey: "pk_test_7d8d24fc-ffdb-4efc-b945-a19847ce319a",
         localization: {
           cardNumberPlaceholder: "Card number",
