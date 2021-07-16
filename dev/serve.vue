@@ -15,7 +15,7 @@ export default defineComponent({
     return {
       config: {
         debug: true,
-        publicKey: "pk_test_7d8d24fc-ffdb-4efc-b945-a19847ce319a",
+        publicKey: "pk_test_42e79f8e-28ad-4eed-8586-2764b1cc78e2",
         localization: {
           cardNumberPlaceholder: "Card number",
           expiryMonthPlaceholder: "MM",
@@ -77,8 +77,6 @@ export default defineComponent({
     </donut>
   </div>
 </template>
-
-
 
 <style>
 iframe {

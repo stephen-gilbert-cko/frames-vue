@@ -89,24 +89,14 @@ export default {
     clearEventHandlers: function () {
       // Remove event handlers to avoid event duplication
       window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_SUBMITTED);
-      window.Frames.removeAllEventHandlers(
-        window.Frames.Events.CARD_TOKENIZATION_FAILED
-      );
+      window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_TOKENIZATION_FAILED);
       window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_TOKENIZED);
-      window.Frames.removeAllEventHandlers(
-        window.Frames.Events.CARD_VALIDATION_CHANGED
-      );
-      window.Frames.removeAllEventHandlers(
-        window.Frames.Events.FRAME_ACTIVATED
-      );
+      window.Frames.removeAllEventHandlers(window.Frames.Events.CARD_VALIDATION_CHANGED);
+      window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_ACTIVATED);
       window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_BLUR);
       window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_FOCUS);
-      window.Frames.removeAllEventHandlers(
-        window.Frames.Events.FRAME_VALIDATION_CHANGED
-      );
-      window.Frames.removeAllEventHandlers(
-        window.Frames.Events.PAYMENT_METHOD_CHANGED
-      );
+      window.Frames.removeAllEventHandlers(window.Frames.Events.FRAME_VALIDATION_CHANGED);
+      window.Frames.removeAllEventHandlers(window.Frames.Events.PAYMENT_METHOD_CHANGED);
       window.Frames.removeAllEventHandlers(window.Frames.Events.READY);
     },
   },
@@ -155,6 +145,11 @@ export default {
   /* Removes all handlers added to the event specified */
   removeAllEventHandlers: function (event) {
     window.Frames.removeAllEventHandlers(event);
+  },
+  /* Allows you to set the Frames cardholder details after initialization */
+  setCardholder: function (cardholder) {
+    let ch = JSON.parse(JSON.stringify(cardholder));
+    window.Frames.cardholder = ch;
   },
 };
 </script>
