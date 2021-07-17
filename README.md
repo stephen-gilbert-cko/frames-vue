@@ -152,7 +152,7 @@ For cases where you render the payment form at the same time as the billing and 
 </script>
 ```
 
-## The `props`
+## Props
 
 | prop                   | description                                                                                                                                              |
 | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -168,7 +168,7 @@ For cases where you render the payment form at the same time as the billing and 
 | cardTokenized          | Triggered after a card is tokenized.                                                                                                                     |
 | cardTokenizationFailed | Triggered if the card tokenization fails.                                                                                                                |
 
-## The `functions`
+## Functions
 
 | function               | description                                                                                                          |
 | ---------------------- | -------------------------------------------------------------------------------------------------------------------- |
