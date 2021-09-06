@@ -1,5 +1,5 @@
 <script>
-import { defineComponent } from "vue";
+import { defineComponent } from "vue-demi";
 
 import { Frames, CardNumber, ExpiryDate, Cvv } from "@/entry.esm";
 
