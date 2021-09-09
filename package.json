@@ -19,10 +19,7 @@
     "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife",
     "test:unit": "vue-cli-service test:unit"
   },
-  "dependencies": {
-    "@vue/composition-api": "^1.0.3",
-    "vue-demi": "^0.11.4"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
@@ -51,8 +48,7 @@
     "vue": "^3.0.5"
   },
   "peerDependencies": {
-    "@vue/composition-api": "^1.0.3",
-    "vue": "^2.6.11 || >=3.0.5"
+    "vue": "^3.0.5"
   },
   "engines": {
     "node": ">=12"
